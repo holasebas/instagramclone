@@ -6,11 +6,15 @@ import {
   View,
   ListView,
   RefreshControl,
-  Image
+  Image,
+  Dimensions
 } from 'react-native';
-
+var width = Dimensions.get('window').width;
 var feedData = require('./feedData');
 const ds1 = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+
+
+import TopBar from './topBar';
 export default class Feed extends Component {
   constructor(props) {
     super(props);
@@ -32,7 +36,7 @@ export default class Feed extends Component {
   }
 
 
-   renderWall(data){
+   renderFeed(data){
     
       if(this.state.loading){
         return(
@@ -41,7 +45,8 @@ export default class Feed extends Component {
       }else{
         return(
           <View style={styles.container}>
-             <ListView 
+             <ListView
+             	style={styles.listView}	 
                 initialListSize={5}
                 enableEmptySections={true}
                 dataSource={data}
@@ -69,14 +74,14 @@ export default class Feed extends Component {
     alignItems: 'center'}}>
            <Text>{rowData.username}</Text>
           <Image
-            style={{width:50, height:50}}
+            style={styles.picture}
             source={rowData.picture} 
            />
           
          
       </View>
            <Image
-             style={{width:300, height:300}}
+             style={styles.media}
             source={rowData.media}
            />
           
@@ -90,8 +95,8 @@ export default class Feed extends Component {
     console.log(feedData)
         return (
         <View style={styles.container}>
-       
-       {this.renderWall(this.state.feedData)}
+       <TopBar />
+       {this.renderFeed(this.state.feedData)}
       </View>
     );
   }
@@ -102,7 +107,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    backgroundColor: '#fff',
   },
   welcome: {
     fontSize: 20,
@@ -114,6 +119,20 @@ const styles = StyleSheet.create({
     color: '#333333',
     marginBottom: 5,
   },
+  listView:{
+  	marginTop:0,
+  	marginBottom:70,
+  	width:width
+  },
+  picture:{
+  	width:60,
+  	height:60,
+  	borderRadius:30
+  },
+  media:{
+  width:width,
+  height:width
+  }
 });
 
-AppRegistry.registerComponent('Feed', () => Feed);
+
