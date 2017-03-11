@@ -11,7 +11,7 @@ import {
 } from 'react-native';
 var width = Dimensions.get('window').width;
 var feedData = require('./feedData');
-const ds1 = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+const ds1 = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2, sectionHeaderHasChanged: (s1, s2) => s1 !== s2});
 
 
 
@@ -23,32 +23,42 @@ export default class Feed extends Component {
     
     this.state = {
 
-      feedData:ds1.cloneWithRows([]),
+      feedData:ds1.cloneWithRowsAndSections([]),
       loading:true,
-      refreshing:false
+      refreshing:false,
+      topBarShow:true
     };
   }
 
   componentDidMount(){
     this.setState({
-      feedData: ds1.cloneWithRows(feedData),
+      feedData: ds1.cloneWithRowsAndSections(feedData),
       loading:false 
     })
-    console.log("listo")
+  
   }
 
-renderSectionHeader(){
+sectionHeader(sectionData, sectionID){
+if(sectionID == 0){
+	return(<Stories />)
+}else{
+	
   return(
-<Stories/>
+  		  <View style={styles.mediaUser}>
+                  
+                  <Image
+                    style={styles.picture}
+                    source={sectionData.media.picture} 
+                   />
+                   <Text style={styles.username}>{sectionData.media.username}</Text>
+                   
+              </View>
     )
+}
 }
    renderFeed(data){
     
-      if(this.state.loading){
-        return(
-           <Text>Loading</Text>
-          )
-      }else{
+    
         return(
           <View>
              <ListView
@@ -57,9 +67,12 @@ renderSectionHeader(){
                 enableEmptySections={true}
                 dataSource={data}
                 renderRow={this._renderRow.bind(this)}
-                showsHorizontalScrollIndicator={false}
-                
-                onChangeVisibleRows={() => console.log("sad")}
+                // showsHorizontalScrollIndicator={false}
+                // stickyHeaderIndices = {[0]} 
+                renderSectionHeader={this.sectionHeader}
+                // stickySectionHeadersEnabled={true}
+                // onChangeVisibleRows={(changedRows) => console.log(changedRows)}
+                automaticallyAdjustContentInsets={false}
                 refreshControl={
                     <RefreshControl
                       refreshing={this.state.refreshing}
@@ -71,7 +84,7 @@ renderSectionHeader(){
               />
           </View>
           ) 
-      }
+      
 
     }
     _likes(likes){
@@ -96,55 +109,88 @@ renderSectionHeader(){
         );
       });
     }
+ // _renderRow(rowData, rowID, sectionID, highlightRow){
+ //     if(sectionID == 0){
+ //     	return(<Stories />)
+ //     }else{
+     	
+ //    return(
+ //      <View style={styles.container}>
 
-    _renderRow(rowData, rowID, sectionID, highlightRow){
-     
-    return(
-      <View style={styles.container}>
-
-              <View style={styles.mediaUser}>
+ //              <View style={styles.mediaUser}>
                   
-                  <Image
-                    style={styles.picture}
-                    source={rowData.picture} 
-                   />
-                   <Text style={styles.username}>{rowData.username}</Text>
+ //                  <Image
+ //                    style={styles.picture}
+ //                    source={rowData.picture} 
+ //                   />
+ //                   <Text style={styles.username}>{rowData.username}</Text>
                    
-              </View>
+ //              </View>
 
 
-             <Image
+ //             <Image
+ //               style={styles.media}
+ //              source={rowData.media}
+ //             />
+ //             <View style={styles.mediaIcons}>
+ //                <Image style={styles.icons} source={require('../images/heart.png')} />
+ //                <Image style={styles.icons} source={require('../images/comm.png')} />
+ //                <Image style={styles.icons} source={require('../images/share.png')} />
+ //             </View>
+ //             <View style={styles.likes}>
+ //            {this._likes(rowData.likes)}
+
+ //            </View>
+
+ //             <View>
+ //            {this._comments(rowData.comments)}
+ //            <Text style={styles.time}>HACE 2 HORAS</Text>
+ //            </View>
+
+
+ //      </View>
+ //      )
+  	  
+	// }
+ //  }
+ //   
+ _renderRow(rowData, rowID, sectionID, highlightRow){
+ 	
+ if(sectionID != "storiesSection"){
+ 		return(
+		<View>
+			 <Image
                style={styles.media}
               source={rowData.media}
              />
              <View style={styles.mediaIcons}>
-                <Image style={styles.icons} source={require('../images/heart.png')} />
-                <Image style={styles.icons} source={require('../images/comm.png')} />
-                <Image style={styles.icons} source={require('../images/share.png')} />
+                 <Image style={styles.icons} source={require('../images/heart.png')} />
+                 <Image style={styles.icons} source={require('../images/comm.png')} />
+                 <Image style={styles.icons} source={require('../images/share.png')} />
+              </View>
+              <View style={styles.likes}>
+             {this._likes(rowData.likes)}
              </View>
-             <View style={styles.likes}>
-            {this._likes(rowData.likes)}
-
-            </View>
-
-             <View>
-            {this._comments(rowData.comments)}
-            <Text style={styles.time}>HACE 2 HORAS</Text>
-            </View>
-
-
-      </View>
-      )
-  }
+               <View>
+             {this._comments(rowData.comments)}
+             <Text style={styles.time}>HACE 2 HORAS</Text>
+             </View>
+		</View>
+ 			)
+ 	}else{
+ 		return false
+ 	}
+ }
   _onRefresh(){}
 
 
   render() {
-    
+
+  	  
         return (
-      <View style={styles.container}>
-       <TopBar />
-       <Stories />
+      <View>
+       <TopBar topBarShow={this.state.topBarShow}/>
+   
        {this.renderFeed(this.state.feedData)}
       </View>
     );
@@ -156,7 +202,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#fff',
+    backgroundColor: '#FFF',
   },
   welcome: {
     fontSize: 20,
@@ -169,10 +215,12 @@ const styles = StyleSheet.create({
     marginBottom: 5,
   },
   listView:{
-   
+
   	marginTop:0,
-  	marginBottom:125,
-  	width:width
+  	marginBottom:180,
+  	width:width,
+  
+  
   },
   picture:{
   	width:30,
@@ -185,13 +233,20 @@ const styles = StyleSheet.create({
   height:width
   },
   mediaUser:{
-    marginTop:20,
+  
     alignItems: 'center',
-    padding:5,
-    marginLeft:10,
+    padding:10,
+
+    backgroundColor:'#FFF',
     
     width:width,
-    flexDirection:'row'
+    flexDirection:'row',
+
+     borderWidth:1,
+  borderTopColor:'#fff',
+  borderLeftColor:'#fff',
+  borderRightColor:'#fff',
+  borderBottomColor:'#fff',
    
   },
   username:{
@@ -217,7 +272,7 @@ const styles = StyleSheet.create({
     flexDirection:'row',
     width:width,
     marginTop:10,
-    marginLeft:20,
+    marginLeft:10,
     marginBottom:10,
 
 
@@ -228,7 +283,7 @@ const styles = StyleSheet.create({
     flexDirection:'row',
     width:width,
 
-    marginLeft:20,
+    marginLeft:10,
     marginBottom:5
   },
   user:{
@@ -241,10 +296,18 @@ const styles = StyleSheet.create({
     fontSize:10
   },
   time:{
-    marginLeft:20,
+    marginLeft:10,
     fontSize:8,
     color:'#777',
     textAlign:'left'
+  },
+  topBar:{
+  	backgroundColor:'blue'
+  },
+  headerSection:{
+  	backgroundColor:'blue',
+  
+  	height:40
   }
 
 });

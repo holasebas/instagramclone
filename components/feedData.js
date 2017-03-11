@@ -1,29 +1,35 @@
 module.exports = [
-	{
+{"storiesSection":{}},
+
+{"media":
+    {
     "userId": 1,
     "name": "Adam Collin",
     "username": "Adam",
     "picture": require('../images/p1.jpg'),
     "media": require('../images/m1.jpg'),
     "likes":[
-    	{"username":"Charlie"},
-    	{"username":"Mary Chen"}
+        {"username":"Charlie"},
+        {"username":"Mary Chen"}
     ],
     "MediaId": 1,
     "comments":[
-    	{
-    	"username": "Charlie",
-    	"comment": "Beatiful pic!!"
-    	},
-    	{
-    	"username": "Mary Chen",
-    	"comment": "GOOD!"
-    	}
+        {
+        "username": "Charlie",
+        "comment": "Beatiful pic!!"
+        },
+        {
+        "username": "Mary Chen",
+        "comment": "GOOD!"
+        }
     ]
 
-  	},
-    {
-    "userId": 1,
+    }},
+
+
+{"media":
+	 {
+    "userId": 2,
     "name": "James Willson",
     "username": "Willson",
     "picture": require('../images/p2.jpg'),
@@ -44,9 +50,11 @@ module.exports = [
         }
     ]
 
-    },
+    }},
+  
+{"media":   
     {
-    "userId": 1,
+    "userId": 4,
     "name": "Arnold Collin",
     "username": "Arnold",
     "picture": require('../images/p3.jpg'),
@@ -67,9 +75,12 @@ module.exports = [
         }
     ]
 
-    },
+    }},
+
+
+ {"media":   
     {
-    "userId": 1,
+    "userId": 5,
     "name": "Billy Gates",
     "username": "Billy",
     "picture": require('../images/p4.jpg'),
@@ -90,9 +101,10 @@ module.exports = [
         }
     ]
 
-    },
+    }},
+{"media":    
     {
-    "userId": 1,
+    "userId": 6,
     "name": "Cameron Ruiz",
     "username": "Cameron",
     "picture": require('../images/p5.jpg'),
@@ -110,9 +122,9 @@ module.exports = [
         
     ]
 
-    },
-    {
-    "userId": 1,
+    }},
+  {"media":  {
+    "userId": 7,
     "name": "Kimber D",
     "username": "Kimber",
     "picture": require('../images/p6.jpg'),
@@ -128,9 +140,9 @@ module.exports = [
        
     ]
 
-    },
-    {
-    "userId": 1,
+    }},
+  {"media":  {
+    "userId": 8,
     "name": "Angelina Well",
     "username": "Angelina",
     "picture": require('../images/p7.jpg'),
@@ -147,9 +159,9 @@ module.exports = [
         }
         ]
 
-    },
-    {
-    "userId": 1,
+    }},
+  {"media":  {
+    "userId": 9,
     "name": "Angela D'llin",
     "username": "Angie",
     "picture": require('../images/p8.jpg'),
@@ -170,9 +182,9 @@ module.exports = [
         }
     ]
 
-    },
-    {
-    "userId": 1,
+    }},
+ {"media":   {
+    "userId": 10,
     "name": "Arc Decen",
     "username": "Phoenix",
     "picture": require('../images/p9.jpg'),
@@ -193,9 +205,9 @@ module.exports = [
         }
     ]
 
-    },
-    {
-    "userId": 1,
+    }},
+   {"media": {
+    "userId": 11,
     "name": "Melani West",
     "username": "Melani ",
     "picture": require('../images/p10.jpg'),
@@ -207,5 +219,5 @@ module.exports = [
     "MediaId": 1,
     "comments":[]
 
-    }
+    }}
 ]

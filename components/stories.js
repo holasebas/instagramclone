@@ -23,27 +23,33 @@ export default class stories extends Component {
 
 
    _renderRow(rowData, rowID, sectionID, highlightRow){
-     
+
+ if(sectionID != 0){
     return(
  
                 <View style={styles.pics}>
               
                   <Image
                     style={styles.pic}
-                    source={rowData.picture} 
+                    source={rowData.media.picture} 
                    />
+                   <Text style={styles.username}>{rowData.media.username}</Text>
 
 
                  </View>
     
       )
+  }else{
+    return false
+  }
   }
 
 
   render() {
-    console.log(this.state.data)
+    
     return (
        <View style={styles.stories}>
+      
              <ListView
                 style={styles.listView}  
                 initialListSize={5}
@@ -63,9 +69,9 @@ export default class stories extends Component {
 const styles = StyleSheet.create({
   
    pic:{
-    width:60,
-    height:60,
-    borderRadius:30,
+    width:50,
+    height:50,
+    borderRadius:25,
     margin:5
     
 
@@ -81,7 +87,9 @@ const styles = StyleSheet.create({
   },
   pics:{   
     flex:1,
-    height:60,
+    height:80,
+
+    alignItems:'center',
     
 
   },
@@ -90,12 +98,16 @@ const styles = StyleSheet.create({
   borderTopColor:'#f2f2f2',
   borderLeftColor:'#f2f2f2',
   borderRightColor:'#f2f2f2',
-  borderBottomColor:'#CCC',
+  borderBottomColor:'#E2E2E2',
 
     width:width,
-    height:70,
+    height:80,
+
   
     backgroundColor: '#f2f2f2',
+  },
+  username:{
+    fontSize:12
   }
 });
 

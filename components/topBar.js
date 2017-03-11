@@ -8,6 +8,11 @@ import {
 } from 'react-native';
 var width = Dimensions.get('window').width;
 export default class topBar extends Component {
+  constructor(props) {
+    super(props);
+  
+    this.state = {};
+  }
   render() {
     return (
       <View style={styles.topBar}>
@@ -25,17 +30,17 @@ const styles = StyleSheet.create({
     backgroundColor: '#F5FCFF',
   },
   topBar:{
-    marginTop:170,
+    marginTop:20,
     height:50,
     width:width,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor:'#fff',
+    backgroundColor:'#FFF',
     borderWidth:1,
     borderTopColor:'#FFF',
-    borderBottomColor:'#FFF',
+    borderBottomColor:'#E2E2E2',
     borderLeftColor:'#FFF',
-    borderRightColor:'#FFF',
+    borderRightColor:'#FFF'
   }
 });
 

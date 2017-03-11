@@ -61,12 +61,12 @@ constructor(props) {
     return (
   
 
-      <TabBarIOS   translucent={false}>
+      <TabBarIOS   translucent={false} style={styles.tabBar}>
            
       
             <TabBarIOS.Item
 
-                title = "Feed"
+             
                  icon={{uri: rateicon, scale: 3}}
                 selected={this.state.selectedTab === 'Feed'}
                 onPress={() => {
@@ -86,7 +86,7 @@ constructor(props) {
 
 
              <TabBarIOS.Item
-            title = "Search"
+          
             tintColor='red'
             icon={{uri: profileicon, scale: 3}}
             selected={this.state.selectedTab === 'Search'}
@@ -103,7 +103,7 @@ constructor(props) {
 
 
           <TabBarIOS.Item
-              title = "Noti"
+            
              icon={{uri: followsicon, scale: 3}}
               selected={this.state.selectedTab === 'Noti'}
               onPress={() => {
@@ -120,7 +120,7 @@ constructor(props) {
 
             <TabBarIOS.Item
                 style={{backgroundColor:'red'}}
-                title = "Profile"
+            
                 icon={{uri: infoicon, scale: 3}}
                 selected={this.state.selectedTab === 'Profile'}
                 onPress={() => {
@@ -162,7 +162,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     color: '#333333',
     marginBottom: 5,
-  },
+  }
 });
 
 
