@@ -64,7 +64,7 @@ export default class instagramclone extends Component {
     return(
 
        <Navigator
-       initialRoute={{ ident: "Feed" }}
+       initialRoute={{ ident: "Search" }}
        renderScene={this._rederScene}
        configureScene={this._configureScene}
     
