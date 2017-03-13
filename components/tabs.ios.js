@@ -43,7 +43,7 @@ constructor(props) {
   super(props);
 
   this.state = {
-    selectedTab: 'Search',
+    selectedTab: 'Feed',
     self:false
   };
 }
@@ -54,7 +54,9 @@ constructor(props) {
 
   
     return (
+
   
+
 
       <TabBarIOS   translucent={false} style={styles.tabBar} tintColor='#000'  unselectedItemTintColor="#777">
            
@@ -75,7 +77,7 @@ constructor(props) {
                   })
                 }}
                 >
-
+  
             <Feed self={this.state.self}/>
             </TabBarIOS.Item>
 
@@ -129,7 +131,7 @@ constructor(props) {
 
 
             <TabBarIOS.Item
-                style={{backgroundColor:'red'}}
+                  
             
                 icon={{uri: profileicon, scale: 4}}
                 selected={this.state.selectedTab === 'Profile'}
@@ -141,12 +143,11 @@ constructor(props) {
               }}
               >
 
-              <Profile/>
+              <Profile navigator={this.props.navigator}/>
            </TabBarIOS.Item>
 
 
       </TabBarIOS>
-       
 
     );
   }

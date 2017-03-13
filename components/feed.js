@@ -109,51 +109,7 @@ if(sectionID == 0){
         );
       });
     }
- // _renderRow(rowData, rowID, sectionID, highlightRow){
- //     if(sectionID == 0){
- //     	return(<Stories />)
- //     }else{
-     	
- //    return(
- //      <View style={styles.container}>
 
- //              <View style={styles.mediaUser}>
-                  
- //                  <Image
- //                    style={styles.picture}
- //                    source={rowData.picture} 
- //                   />
- //                   <Text style={styles.username}>{rowData.username}</Text>
-                   
- //              </View>
-
-
- //             <Image
- //               style={styles.media}
- //              source={rowData.media}
- //             />
- //             <View style={styles.mediaIcons}>
- //                <Image style={styles.icons} source={require('../images/heart.png')} />
- //                <Image style={styles.icons} source={require('../images/comm.png')} />
- //                <Image style={styles.icons} source={require('../images/share.png')} />
- //             </View>
- //             <View style={styles.likes}>
- //            {this._likes(rowData.likes)}
-
- //            </View>
-
- //             <View>
- //            {this._comments(rowData.comments)}
- //            <Text style={styles.time}>HACE 2 HORAS</Text>
- //            </View>
-
-
- //      </View>
- //      )
-  	  
-	// }
- //  }
- //   
  _renderRow(rowData, rowID, sectionID, highlightRow){
  	
  if(sectionID != "storiesSection"){
@@ -189,7 +145,7 @@ if(sectionID == 0){
   	  
         return (
       <View>
-       <TopBar topBarShow={this.state.topBarShow}/>
+       <TopBar title={'Feed'}/>
    
        {this.renderFeed(this.state.feedData)}
       </View>

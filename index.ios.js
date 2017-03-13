@@ -11,13 +11,10 @@ import {
   ListView,
   Dimensions,
   TouchableHighlight,
-  AlertIOS
+  
 } from 'react-native'
-var width = Dimensions.get('window').width; //full width
-var height = Dimensions.get('window').height; //full height
-
-
- 
+var width = Dimensions.get('window').width; 
+var height = Dimensions.get('window').height;
 
 
 
@@ -28,6 +25,7 @@ import Tabs from './components/tabs';
 import Search from './components/search';
 import Noti from './components/noti';
 import Profile from './components/profile';
+import Photo from './components/foto';
 
 
 
@@ -47,12 +45,16 @@ export default class instagramclone extends Component {
         return(<Tabs />)
       case 'Profile':
         return(<Tabs {...globalProps}/>)
+      case 'Photo':
+        return(<Photo {...globalProps} data={route.data}/>)
       
     }
   }
   _configureScene(route, routeStack){
     switch(route.ident){
       case "Feed":
+      return Navigator.SceneConfigs.PushFromRight
+      case "Photo":
       return Navigator.SceneConfigs.PushFromRight
       default:
       return Navigator.SceneConfigs.FloatFromRight
@@ -64,7 +66,7 @@ export default class instagramclone extends Component {
     return(
 
        <Navigator
-       initialRoute={{ ident: "Search" }}
+       initialRoute={{ ident: "Feed" }}
        renderScene={this._rederScene}
        configureScene={this._configureScene}
     
@@ -74,51 +76,6 @@ export default class instagramclone extends Component {
       )
   }
 
-
-}
-
-export class EstadosPicker extends Component {
-
-  constructor(props) {
-    super(props);
- 
-    this.state = {
-      selected: '0',
-      mensaje: 'Mensaje',
-      desc: arr[0],
-      platillos: null,
-      dataSource: emptyDS.cloneWithRows([])
-
-    };
-
-    
-  }
-
-
- 
-
- 
-  render() {
-
-      var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
-
-  
-
-      return( 
-      <View style={styles.container}>
-      
-          
-        </View>
-       
-        
-
-
-        )
-
-  }
-
-
-    
 
 }
 
